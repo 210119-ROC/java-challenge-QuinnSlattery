@@ -21,9 +21,15 @@ public class EvaluationService {
 	static class SpeedConverter {
 
 		public static long toMilesPerHour(double kilometersPerHour) {
-			// TODO Write an implementation for this method declaration
-			return 0;
+			
+			if (kilometersPerHour < 0) {
+				return -1;
+			}else {
+				long milesPerHour = Math.round(kilometersPerHour*(1 / 0.62137119));
+				return milesPerHour;
+			}
 		}
+	
 
 		/**
 		 * 1.B Speed Converter - Print Conversion
@@ -41,10 +47,18 @@ public class EvaluationService {
 		 * Value"
 		 */
 		public static String printConversion(double kilometersPerHour) {
-			// TODO Write an implementation for this method declaration
-			return null;
+			
+				if (kilometersPerHour < 0) {
+					String statement = "Invalid Value";
+					return statement;
+				}else {
+					long milesPerHour = Math.round(kilometersPerHour*(1 / 0.62137119));
+					String statement = kilometersPerHour + " km/h = " + milesPerHour + " mi/h";
+					return statement;
+				}
+			}
 		}
-	}
+
 
 	/**
 	 * 2. MegaBytes and KiloBytes
@@ -67,8 +81,10 @@ public class EvaluationService {
 	 * Value".
 	 */
 	public String printMegaBytesAndKiloBytes(int XX) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		int YY = XX / 1024;
+		int ZZ = XX  % 1024;
+		String answer = XX + " KB = " + YY + " MB and " + ZZ + " KB ";
+		return answer;
 	}
 
 	/**
@@ -91,8 +107,11 @@ public class EvaluationService {
 	 * If the hourOfDay parameter is less than 0 or greater than 23, return false.
 	 */
 	public boolean shouldWakeUp(boolean isBarking, int hourOfDay) {
-		// TODO Write an implementation for this method declaration
-		return false;
+		if(isBarking && hourOfDay < 22 && hourOfDay > 8) {
+		return true;
+		} else {
+		return false;	
+		}
 	}
 
 	/**
