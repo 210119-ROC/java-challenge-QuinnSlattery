@@ -1,5 +1,7 @@
 package com.revature.eval.java.core;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Map;
 
@@ -20,15 +22,18 @@ public class EvaluationService {
 	 */
 	static class SpeedConverter {
 
-		public static long toMilesPerHour(double kilometersPerHour) {
+public static long toMilesPerHour(double kilometersPerHour) {
 			
-			if (kilometersPerHour < 0) {
-				return -1;
-			}else {
-				long milesPerHour = Math.round(kilometersPerHour*(1 / 0.62137119));
+			long milesPerHour=-1L;
+			double conversion =0.621371;
+			
+			if (kilometersPerHour<0) {
 				return milesPerHour;
-			}
+			} else {
+			milesPerHour=Math.round(kilometersPerHour*conversion);
+			return milesPerHour;
 		}
+}
 	
 
 		/**
@@ -48,15 +53,19 @@ public class EvaluationService {
 		 */
 		public static String printConversion(double kilometersPerHour) {
 			
-				if (kilometersPerHour < 0) {
-					String statement = "Invalid Value";
-					return statement;
-				}else {
-					long milesPerHour = Math.round(kilometersPerHour*(1 / 0.62137119));
-					String statement = kilometersPerHour + " km/h = " + milesPerHour + " mi/h";
-					return statement;
-				}
+			long milesPerHour=-1L;
+			double conversion =0.621371;
+			String statement;
+			
+			if (kilometersPerHour<0) {
+				statement = "Invalid True";
+				return statement;
+			} else {
+			milesPerHour=Math.round(kilometersPerHour*conversion);
+			statement = kilometersPerHour + " km/h = " + milesPerHour + " mi/h";
+			return statement;
 			}
+		}
 		}
 
 
@@ -81,10 +90,16 @@ public class EvaluationService {
 	 * Value".
 	 */
 	public String printMegaBytesAndKiloBytes(int XX) {
+		String answer;
+		if (XX < 0) {
+			answer = "Invalid Value";
+			return answer;
+		} else {
 		int YY = XX / 1024;
 		int ZZ = XX  % 1024;
-		String answer = XX + " KB = " + YY + " MB and " + ZZ + " KB ";
+		answer = XX + " KB = " + YY + " MB and " + ZZ + " KB ";
 		return answer;
+		}
 	}
 
 	/**
@@ -107,7 +122,7 @@ public class EvaluationService {
 	 * If the hourOfDay parameter is less than 0 or greater than 23, return false.
 	 */
 	public boolean shouldWakeUp(boolean isBarking, int hourOfDay) {
-		if(isBarking && hourOfDay < 22 && hourOfDay > 8) {
+		if(isBarking && (hourOfDay < 22 || hourOfDay > 8)) {
 		return true;
 		} else {
 		return false;	
@@ -126,8 +141,16 @@ public class EvaluationService {
 	 * Otherwise, return false;
 	 */
 	public boolean areEqualByThreeDecimalPlaces(double firstNum, double secondNum) {
-		// TODO Write an implementation for this method declaration
-		return false;
+		BigDecimal first = new BigDecimal(Double.toString(firstNum));
+	    first = first.setScale(3, RoundingMode.DOWN);
+	    BigDecimal second = new BigDecimal(Double.toString(secondNum));
+	    second = second.setScale(3, RoundingMode.DOWN);
+	  		   
+	    
+	    if (first.doubleValue() == second.doubleValue()) 
+	    	return true;
+	    else 
+	    	return false;
 	}
 
 	/**
@@ -143,17 +166,23 @@ public class EvaluationService {
 	static class TeenNumberChecker {
 
 		public static boolean hasTeen(int x, int y, int z) {
-			// TODO Write an implementation for this method declaration
+			if(isTeen(x) || isTeen(y) || isTeen(z)) {
+					return true;
+		} else {
 			return false;
 		}
+}
 
 		// We can initialize isTeen method first
 		// Then pass the parameter to hasTeen method
 
 		public static boolean isTeen(int number) {
-			// TODO Write an implementation for this method declaration
+			if (number >= 13 && number <= 19) {
+			return true;
+		} else {
 			return false;
 		}
+	}
 	}
 
 	/**
@@ -172,8 +201,11 @@ public class EvaluationService {
 	 * ZZ represents the calculated days.
 	 */
 	public String printYearsAndDays(long minutes) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		if (minutes <0 )
+			return "Invalid Value";
+			long YY = minutes / 525600L;
+			long ZZ = (minutes %  525600L) / 1440L;
+		return minutes + " min = " + YY + " y and "+ ZZ + " d";
 	}
 
 	/**
@@ -186,8 +218,27 @@ public class EvaluationService {
 	 * statement or switch statement whatever is easier for you.
 	 */
 	public String printNumberInWord(int number) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		switch (number) {
+		case 1:
+			return "ONE";
+		case 2:
+			return "TWO";
+		case 3:
+			return "THREE";
+		case 4:
+			return "FOUR";
+		case 5: 
+			return "FIVE";
+		case 6:
+			return "SIX";
+		case 7:
+			return "SEVEN";
+		case 8:
+			return "EIGHT";
+		case 9:
+			return "NINE";
+		default: return "OTHER";
+		}
 	}
 
 	/**

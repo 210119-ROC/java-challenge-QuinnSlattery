@@ -6,18 +6,21 @@ public class EvalTestingClass {
 	
 	public static void main(String[] args) {
 		
-		boolean test = shouldWakeUp(false, 12);
+		long test = SpeedConverter.toMilesPerHour(100);
 		System.out.println(test);
 }
 
 
-	public static boolean shouldWakeUp(boolean isBarking, int hourOfDay) {
-		if(isBarking && hourOfDay < 22 && hourOfDay > 8) {
-		return true;
-		} else {
-		return false;	
+	static class SpeedConverter {
+
+		public static long toMilesPerHour(double kilometersPerHour) {
+			
+			if (kilometersPerHour < 0) {
+				return -1;
+			}else {
+				long milesPerHour = Math.round(kilometersPerHour*(1 / 0.621371));
+				return milesPerHour;
+			}
 		}
 	}
-		
 }
-
