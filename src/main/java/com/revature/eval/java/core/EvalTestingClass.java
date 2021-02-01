@@ -6,21 +6,20 @@ public class EvalTestingClass {
 	
 	public static void main(String[] args) {
 		
-		long test = SpeedConverter.toMilesPerHour(100);
+		String test = reverse("hello");
 		System.out.println(test);
+		
 }
 
 
-	static class SpeedConverter {
-
-		public static long toMilesPerHour(double kilometersPerHour) {
-			
-			if (kilometersPerHour < 0) {
-				return -1;
-			}else {
-				long milesPerHour = Math.round(kilometersPerHour*(1 / 0.621371));
-				return milesPerHour;
-			}
+	static public String reverse(String string) {
+		char[] myArray = string.toCharArray();	
+		System.out.println(myArray);
+		String returnString = "";
+		
+		for(int i = 1; i <= string.length(); i++) {
+			returnString = returnString + myArray[string.length() - i];
 		}
+		return returnString;
 	}
 }

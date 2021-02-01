@@ -97,7 +97,7 @@ public static long toMilesPerHour(double kilometersPerHour) {
 		} else {
 		int YY = XX / 1024;
 		int ZZ = XX  % 1024;
-		answer = XX + " KB = " + YY + " MB and " + ZZ + " KB ";
+		answer = XX + " KB = " + YY + " MB and " + ZZ + " KB";
 		return answer;
 		}
 	}
@@ -261,8 +261,18 @@ public static long toMilesPerHour(double kilometersPerHour) {
 	 * and there is no resulting remainder.
 	 */
 	public int getGreatestCommonDivisor(int first, int second) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		if (first < 10 || second < 10) {
+			return -1;
+		}
+		int i = 0;
+		int greatestCommonDivisor = 1;
+		while (i < first && i < second) {
+			i++;
+			if ((first % i == 0) && (second % i == 0)) {
+				greatestCommonDivisor = i;
+			}
+		}
+		return greatestCommonDivisor;
 	}
 
 	/**
@@ -279,8 +289,18 @@ public static long toMilesPerHour(double kilometersPerHour) {
 	 * invalid value.
 	 */
 	public int sumFirstAndLastDigit(int num) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		if (num < 0) {
+			return -1;
+		}
+		
+		int firstDigit = num % 10;
+		int lastDigit = 0;
+		do {
+			num = num / 10;
+			lastDigit = num % 10;
+		}while (num > 10);
+		
+		return firstDigit + lastDigit;
 	}
 
 	/**
@@ -290,8 +310,14 @@ public static long toMilesPerHour(double kilometersPerHour) {
 	 * reverses a String. Example: reverse("example"); -> "elpmaxe"
 	 */
 	public String reverse(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		char[] myArray = string.toCharArray();	
+		System.out.println(myArray);
+		String returnString = "";
+		
+		for(int i = 1; i <= string.length(); i++) {
+			returnString = returnString + myArray[string.length() - i];
+		}
+		return returnString;
 	}
 
 	/**
